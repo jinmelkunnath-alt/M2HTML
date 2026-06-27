@@ -1,0 +1,3 @@
+import { examples } from '../data/examples';
+import { Card, Button } from '../components/ui';
+export function Examples() { return <div><h1 className="mb-6 text-4xl font-black">Examples</h1><div className="grid gap-4 md:grid-cols-2">{examples.map(e=><Card key={e.slug}><div className="text-sm text-forge-400">{e.difficulty}</div><h2 className="text-2xl font-bold">{e.title}</h2><pre className="mt-3 max-h-40 overflow-auto rounded-xl bg-black/30 p-3 text-xs">{e.content}</pre><Button onClick={()=>{localStorage.setItem('markforge.example', e.content); history.pushState(null,'','/playground'); dispatchEvent(new Event('popstate'));}}>Open in Playground</Button></Card>)}</div></div>; }

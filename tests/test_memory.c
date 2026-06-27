@@ -1,0 +1,3 @@
+#include "markforge/markforge.h"
+#include "markforge/test.h"
+void test_memory_module(void){ mf_arena_t a; mf_pool_t p; mf_heap_t*h=NULL; void*x; MF_TEST_ASSERT_EQ_INT(mf_arena_init(&a,128U,mf_allocator_system()),MF_OK); x=mf_arena_alloc(&a,16U,8U); MF_TEST_ASSERT(x!=NULL); MF_TEST_ASSERT(mf_arena_used(&a)>=16U); mf_arena_destroy(&a); MF_TEST_ASSERT_EQ_INT(mf_pool_init(&p,16U,2U,mf_allocator_system()),MF_OK); x=mf_pool_alloc(&p); MF_TEST_ASSERT(x!=NULL); mf_pool_free(&p,x); MF_TEST_ASSERT_EQ_INT((int)mf_pool_used(&p),0); mf_pool_destroy(&p); MF_TEST_ASSERT_EQ_INT(mf_heap_init(&h),MF_OK); x=mf_heap_alloc(h,8U,"test"); MF_TEST_ASSERT(x!=NULL); mf_heap_free(h,x); MF_TEST_ASSERT_EQ_INT((int)mf_heap_report_leaks(h),0); mf_heap_destroy(h); }

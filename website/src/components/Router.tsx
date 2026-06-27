@@ -1,0 +1,5 @@
+import { ReactNode, useEffect, useState } from 'react';
+export function path(): string { return window.location.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/'; }
+export function Link({ href, children, className = '' }: { href: string; children: ReactNode; className?: string }) { return <a className={className} href={import.meta.env.BASE_URL.replace(/\/$/, '') + href} onClick={e => { e.preventDefault(); history.pushState(null, '', import.meta.env.BASE_URL.replace(/\/$/, '') + href); window.dispatchEvent(new Event('popstate')); }}>{children}</a>; }
+export function NavLink({ href, children }: { href: string; children: ReactNode }) { return <Link href={href} className="rounded-lg px-3 py-2 text-sm hover:bg-white/10">{children}</Link>; }
+export function useRoute() { const [route, setRoute] = useState(path()); useEffect(() => { const fn = () => setRoute(path()); addEventListener('popstate', fn); return () => removeEventListener('popstate', fn); }, []); return route; }

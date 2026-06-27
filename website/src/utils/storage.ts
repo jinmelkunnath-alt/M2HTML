@@ -1,0 +1,6 @@
+export type Settings = { theme: 'dark' | 'light' | 'system'; fontSize: number; fontFamily: string; tabWidth: number; wordWrap: boolean; renderer: 'html' | 'json' | 'xml' | 'text'; animations: boolean; autoSave: boolean; language: string };
+export const defaultSettings: Settings = { theme: 'dark', fontSize: 14, fontFamily: 'JetBrains Mono, ui-monospace, monospace', tabWidth: 2, wordWrap: true, renderer: 'html', animations: true, autoSave: true, language: 'en' };
+export function loadSettings(): Settings { try { return { ...defaultSettings, ...JSON.parse(localStorage.getItem('markforge.settings') || '{}') }; } catch { return defaultSettings; } }
+export function saveSettings(settings: Settings): void { localStorage.setItem('markforge.settings', JSON.stringify(settings)); }
+export function saveRecent(name: string, content: string): void { const recent = JSON.parse(localStorage.getItem('markforge.recent') || '[]') as Array<{ name: string; content: string; time: number }>; localStorage.setItem('markforge.recent', JSON.stringify([{ name, content, time: Date.now() }, ...recent.filter(r => r.name !== name)].slice(0, 8))); }
+export function loadRecent(): Array<{ name: string; content: string; time: number }> { try { return JSON.parse(localStorage.getItem('markforge.recent') || '[]'); } catch { return []; } }

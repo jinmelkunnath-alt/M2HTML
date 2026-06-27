@@ -1,0 +1,2 @@
+import { Card } from '../components/ui';
+export function Architecture() { return <div className="space-y-4"><h1 className="text-4xl font-black">Architecture</h1>{['File Reader','Tokenizer','Token Stream','Recursive Descent Parser','AST Builder','Visitor System','Renderer Manager','Exporters'].map((x,i)=><Card key={x}><div className="text-forge-400">Step {i+1}</div><h2 className="text-2xl font-bold">{x}</h2><p className="opacity-75">Stable module boundary designed for long-term extension.</p></Card>)}</div>; }
