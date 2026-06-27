@@ -3,14 +3,22 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: process.env.GITHUB_PAGES === 'true'
-  ? '/M2HTML/'
-  : '/',
+  base: mode === 'production' ? '/M2HTML/' : '/',
   build: {
     outDir: 'dist',
     sourcemap: mode !== 'production',
     assetsDir: 'assets',
-    rollupOptions: { output: { manualChunks: { editor: ['@monaco-editor/react', 'monaco-editor'], motion: ['framer-motion'] } } }
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          editor: ['@monaco-editor/react', 'monaco-editor'],
+          motion: ['framer-motion']
+        }
+      }
+    }
   },
-  server: { host: '127.0.0.1', port: 5173 }
+  server: {
+    host: '127.0.0.1',
+    port: 5173
+  }
 }));
