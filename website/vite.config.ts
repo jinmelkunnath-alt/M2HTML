@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: process.env.GITHUB_PAGES === 'true' ? '/MarkForge/' : '/',
+  base: process.env.GITHUB_PAGES === 'true'
+  ? '/M2HTML/'
+  : '/',
   build: {
     outDir: 'dist',
     sourcemap: mode !== 'production',
