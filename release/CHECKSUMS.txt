@@ -1,0 +1,3 @@
+2387901166 1176 build/release/RELEASE_NOTES_0.5.0-alpha.md
+821854399 798720 build/release/markforge-0.5.0-alpha-source.tar
+1900884339 256532 build/release/markforge-0.5.0-alpha-source.zip
